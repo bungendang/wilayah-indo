@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Article = mongoose.model('Article');
 const Province = mongoose.model('Province');
 const City = mongoose.model('City');
+const District = mongoose.model('District');
 
 module.exports = (app) => {
   app.use('/', router);
@@ -54,6 +55,25 @@ router.get('/cities', (req, res, next) => {
 		if (err) return next(err);
 		res.json({
 			results: cities
+		})
+	})
+});
+
+
+router.get('/district', (req, res, next) => {
+	var params = {}
+	var query =  req.query
+	var reg_id = query.city_id
+	// console.log(prov_id)
+	if (query.city_id) {
+		params = {regency_id: reg_id}
+	} else {
+
+	}
+	District.find(params).select('-_id').exec((err,districts)=>{
+		if (err) return next(err);
+		res.json({
+			results: districts
 		})
 	})
 });
