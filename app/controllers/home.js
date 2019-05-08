@@ -26,3 +26,15 @@ router.get('/provinces', (req, res, next) => {
     })
   });
 });
+
+router.get('/province/:id', (req, res, next) => {
+	// console.log(req.params.id)
+	var id = req.params.id
+	console.log(id)
+	Province.findOne({"id":id}).select('-_id').exec((err, provinces) => {
+		if (err) return next(err);
+		res.json({
+			results: provinces
+		})
+	});
+});

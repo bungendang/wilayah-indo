@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProvinceSchema = new Schema({
-  id: Number,
+  id: String,
   name: String
 });
 
