@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Article = mongoose.model('Article');
 const Province = mongoose.model('Province');
+const City = mongoose.model('City');
 
 module.exports = (app) => {
   app.use('/', router);
@@ -37,4 +38,22 @@ router.get('/province/:id', (req, res, next) => {
 			results: provinces
 		})
 	});
+});
+
+router.get('/cities', (req, res, next) => {
+	var params = {}
+	var query =  req.query
+	var prov_id = parseInt(query.province_id) 
+	console.log(prov_id)
+	if (query.province_id && typeof prov_id == 'number') {
+		params = {province_id: prov_id}
+	} else {
+
+	}
+	City.find(params).select('-_id').exec((err,cities)=>{
+		if (err) return next(err);
+		res.json({
+			results: cities
+		})
+	})
 });

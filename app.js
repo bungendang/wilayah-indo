@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 mongoose.connect(config.db, { useMongoClient: true, /* other options */ });
 const db = mongoose.connection;
+
 db.on('error', () => {
   throw new Error('unable to connect to database at ' + config.db);
 });
