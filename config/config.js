@@ -8,7 +8,7 @@ const config = {
     app: {
       name: 'wilayah'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 5000,
     db: 'mongodb://public:password1@ds213832.mlab.com:13832/indonesian-administrative'
   },
 

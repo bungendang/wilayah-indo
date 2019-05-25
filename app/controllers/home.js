@@ -5,6 +5,7 @@ const Article = mongoose.model('Article');
 const Province = mongoose.model('Province');
 const City = mongoose.model('City');
 const District = mongoose.model('District');
+const Villages = mongoose.model('Villages');
 
 module.exports = (app) => {
   app.use('/', router);
@@ -76,4 +77,25 @@ router.get('/district', (req, res, next) => {
 			results: districts
 		})
 	})
+});
+
+
+router.get('/villages', (req, res, next) => {
+	var params = {}
+	var query =  req.query
+	var dis_id = parseInt(query.district_id) 
+	// console.log(prov_id)
+	if (query.district_id && typeof dis_id == 'number') {
+		params = {district_id: dis_id}
+	} else {
+
+	}
+	console.log(params)
+	Villages.find(params).select('-_id').exec((err,districts)=>{
+		if (err) return next(err);
+		res.json({
+			results: districts
+		})
+	})
+	// res.json({status: "Success"})
 });
